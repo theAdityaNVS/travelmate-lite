@@ -56,31 +56,18 @@ npm run test
 
 ## Deployment
 
-This application is containerized and deployed to Google Cloud Run.
+### Option 1: Google Cloud Run (Containerized)
+This application is containerized and can be deployed to Google Cloud Run.
 
-### Prerequisites
-
+#### Prerequisites
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) installed and authenticated.
 - A Google Cloud project with Billing and Cloud Run API enabled.
 
-### Deployment Steps
-
-1. **Authenticate with Google Cloud:**
-   ```bash
-   gcloud auth login
-   ```
-
-2. **Set your project ID:**
-   ```bash
-   gcloud config set project YOUR_PROJECT_ID
-   ```
-
-3. **Build and push the Docker image to Container Registry:**
-   ```bash
-   gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/travelmate-lite
-   ```
-
-4. **Deploy to Cloud Run:**
+#### Deployment Steps
+1. **Authenticate with Google Cloud:** `gcloud auth login`
+2. **Set your project ID:** `gcloud config set project YOUR_PROJECT_ID`
+3. **Build and push:** `gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/travelmate-lite`
+4. **Deploy:**
    ```bash
    gcloud run deploy travelmate-lite \
      --image gcr.io/YOUR_PROJECT_ID/travelmate-lite \
@@ -89,6 +76,19 @@ This application is containerized and deployed to Google Cloud Run.
      --allow-unauthenticated \
      --set-env-vars="GEMINI_API_KEY=your_key,NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key"
    ```
+
+### Option 2: Vercel (Edge-Optimized)
+For the fastest global performance and zero-config CI/CD, deploy to Vercel.
+
+#### Deployment Steps
+1. **Push to GitHub:** Connect your repository to Vercel.
+2. **Configure Environment Variables:** Add `GEMINI_API_KEY` and `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` in the Vercel Project Settings.
+3. **Deploy:** Vercel will automatically detect Next.js and deploy.
+
+## API Preparation
+Before running or deploying, ensure you have access to the following:
+- **Google Gemini API Key:** Get it from [Google AI Studio](https://aistudio.google.com/).
+- **Google Maps API Key:** Enable 'Maps JavaScript API', 'Places API', and 'Routes API' in the [Google Cloud Console](https://console.cloud.google.com/).
 
 ## Architecture
 
