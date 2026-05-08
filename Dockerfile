@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
@@ -10,6 +10,8 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyDDKKnuEYDmCgC8KgFgK1ZLg991VSHOWXU
+ENV GEMINI_API_KEY=AIzaSyAAHh2xFpPCe_VPK6ymYdRchXWkh5UypEg
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
